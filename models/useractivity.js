@@ -10,7 +10,7 @@ function UserActivity(ua){
     this.activityId = ua.activityId;
 }
 
-UserActivity.prototype.save = function(callback){
+UserActivity.prototype.save = function(conn, callback){
     var that = this;
     query(that.userId, that.activityId, function(err, rows){
         if(err){
@@ -21,7 +21,9 @@ UserActivity.prototype.save = function(callback){
                     user_id : that.userId,
                     activity_id : that.activityId
                 };
-                insert(userActivity, callback);
+                insert(conn, userActivity, callback);
+            }else{
+                callback(null);
             }
         }
     });
@@ -31,8 +33,8 @@ function query(userId, activityId, callback){
     dbPool.query("select * from user_activity where user_id = ? and activity_id = ?", [userId, activityId], callback);
 }
 
-function insert(userActivity, callback) {
-    dbPool.query('insert into user_activity set ?', userActivity, callback);
+function insert( conn, userActivity, callback) {
+    conn.query('insert into user_activity set ?', userActivity, callback);
 }
 
 module.exports = UserActivity;

@@ -1,10 +1,12 @@
 var mysql = require('mysql');
+var setting = require('../setting');
+
 var dbPool = mysql.createPool({
     connectionLimit : 10,
-    host: 'mysql.cl5zxklrqlb3.ap-northeast-1.rds.amazonaws.com',
-    user: 'wewriter',
-    password: '64156415',
-    database : 'wewriter',
+    host: setting.host,
+    user: setting.user,
+    password: setting.password,
+    database : setting.db,
     charset : 'utf8',
     port: '3306'});
 

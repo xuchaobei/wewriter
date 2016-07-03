@@ -18,7 +18,7 @@ function User(user){
 
 module.exports = User;
 
-User.prototype.save = function save(callback){
+User.prototype.save = function save(conn, callback){
     var userId = this.userId;
     var user = {
         user_id : this.userId,
@@ -31,7 +31,7 @@ User.prototype.save = function save(callback){
     var userFromDB = null ;
     async.series([
         function checkUserExist(callback) {
-            queryById(userId, function(err, user){
+            queryById( userId, function(err, user){
                 if(err){
                     callback(err);
                 }else{
@@ -44,7 +44,7 @@ User.prototype.save = function save(callback){
             if (userFromDB != null) {
                 callback(null);
             } else {
-                insert(user, callback);
+                insert(conn, user, callback);
             }
         },
         function updateUser(callback) {
@@ -66,7 +66,7 @@ User.prototype.save = function save(callback){
                 var sql = 'update user set continuous_count = ? , total_count = ? , total_words = ?, `date` = ? ' +
                     'where user_id = ?';
                 var params = [userFromDB.continuous_count, userFromDB.total_count, userFromDB.total_words, user.date, userFromDB.user_id];
-                dbPool.query(sql, params, callback);
+                conn.query( sql, params, callback);
             }
         }
     ], function (err, results) {
@@ -116,6 +116,6 @@ function queryByName(userName, callback){
     });
 }
 
-function insert(user, callback) {
-    dbPool.query('insert into user set ?', user, callback);
+function insert(conn, user, callback) {
+    conn.query('insert into user set ?', user, callback);
 }

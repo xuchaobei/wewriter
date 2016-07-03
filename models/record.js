@@ -14,7 +14,7 @@ function Record(record) {
     this.category = record.category;
 }
 
-Record.prototype.save = function save(callback) {
+Record.prototype.save = function save(conn, callback) {
     var record = {
         user_id : this.userId,
         user_name: this.userName,
@@ -36,7 +36,7 @@ Record.prototype.save = function save(callback) {
             });
         },
         function insertRecord(callback) {
-            insert(record, callback);
+            insert(conn, record, callback);
         }
 
     ], function (err, results) {
@@ -54,8 +54,8 @@ function queryByUserAndDate(userName, date, callback){
     dbPool.query('select * from record where user_name = ? and `date` = ? ', [userName, date], callback);
 }
 
-function insert(record, callback) {
-    dbPool.query('insert into record set ?', record, callback);
+function insert(conn, record, callback) {
+    conn.query('insert into record set ?', record, callback);
 }
 
 
