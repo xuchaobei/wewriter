@@ -14,4 +14,35 @@ $(document).ready(function(){
             });
     });
 
+    $("#search").click(function(){
+        var startDate = $('#startDate').val();
+        var endDate = $('#endDate').val();
+        var name = $('#name').val();
+        var ifMember = $("#ifMember").is(':checked');
+
+        $.getJSON("report/search",
+            {
+                startDate: startDate,
+                endDate: endDate,
+                name: name,
+                ifMember: ifMember
+            },
+            function(result){
+                setSearchResult(result);
+            }
+        );
+    });
+
+    function setSearchResult(data){
+        $("#result tbody").empty();
+        for(var i = 0; i < data.length; i++){
+            $tr = $('<tr></tr>');
+            $('<td>'+ (i+1) + '</td>').appendTo($tr);
+            $('<td>'+ data[i].user_name + '</td>').appendTo($tr);
+            $('<td>'+ data[i].title + '</td>').appendTo($tr);
+            $('<td>'+ data[i].word_count + '</td>').appendTo($tr);
+            $('<td>'+ data[i].date.substr(0,10) + '</td>').appendTo($tr);
+            $("#result tbody").append($tr);
+        }
+    }
 });

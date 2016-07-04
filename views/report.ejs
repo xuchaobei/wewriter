@@ -1,0 +1,52 @@
+<% include header.ejs %>
+    <div class="container">
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label class="col-xs-2 control-label" >开始日期</label>
+                <div class="col-xs-10">
+                    <input type="date" id="startDate" class="form-control" placeholder="格式: yyyy-mm-dd"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">结束日期</label>
+                <div class="col-xs-10">
+                    <input type="date" id="endDate" class="form-control" placeholder="格式: yyyy-mm-dd"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-2 control-label">昵称</label>
+                <div class="col-xs-10">
+                    <input type="text" id="name" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" id="ifMember"> 21天写作成员
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-2 col-xs-10">
+                    <input type="button" id="search" value="查询" class="btn btn-default"/>
+                </div>
+            </div>
+        </form>
+
+        <table id="result" class="table table-bordered text-center">
+            <thead>
+            <tr>
+                <td>序号</td>
+                <td>昵称</td>
+                <td>标题</td>
+                <td>字数</td>
+                <td>日期</td>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+<% include footer.ejs %>

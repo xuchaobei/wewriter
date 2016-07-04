@@ -7,6 +7,7 @@ var express = require('express')
     , record = require('./routes/record')
     , user = require('./routes/user')
     , activity =require('./routes/activity')
+    , report =require('./routes/report')
     , http = require('http')
     , path = require('path')
     , qs = require('querystring')
@@ -64,6 +65,7 @@ function init() {
     app.use('/record/:user', record);
     app.use('/record-activity', activity);
     app.use('/user', user);
+    app.use('/report', report);
 
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);

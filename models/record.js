@@ -50,6 +50,36 @@ Record.prototype.save = function save(conn, callback) {
     });
 };
 
+Record.get = function get(param, callback){
+    var sql = "select user_name,title,word_count,convert_tz(`date`, '+00:00', '+08:00') as `date` from record r ";
+    var name = param.name;
+    var startDate = param.startDate;
+    var endDate = param.endDate;
+    var ifMember = param.ifMember;
+
+    if(ifMember == 'true'){
+        sql = sql + 'join user_activity u where r.user_id = u.user_id ';
+    }
+    if((name && name.length>0)){
+        if(ifMember == 'true'){
+            sql = sql + "and r.user_name='" +name+ "' ";
+        }else{
+            sql = sql + "where r.user_name='" +name+ "' ";
+        }
+
+    }
+    if((startDate&& startDate.length>0)  || (endDate&& endDate.length>0)){
+        if(ifMember == 'true' || (name && name.length>0)){
+            sql = sql + "and r.date between '" +startDate +"' and '" + endDate+ "'";
+        }else{
+            sql = sql + "where r.date between '" +startDate +"' and '" + endDate+ "'";
+        }
+    }
+
+    dbPool.query(sql, callback);
+
+};
+
 function queryByUserAndDate(userName, date, callback){
     dbPool.query('select * from record where user_name = ? and `date` = ? ', [userName, date], callback);
 }
