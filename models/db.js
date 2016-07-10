@@ -2,7 +2,8 @@ var mysql = require('mysql');
 var setting = require('../setting');
 
 var dbPool = mysql.createPool({
-    connectionLimit : 10,
+    connectionLimit : 20,
+    queueLimit : 50,
     host: setting.host,
     user: setting.user,
     password: setting.password,

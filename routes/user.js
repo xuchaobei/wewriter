@@ -9,8 +9,8 @@ router.get('/check', function(req, res, next) {
   var params = qs.parse(queryUrl);
   var name = decodeURIComponent(params.name);
   User.getByName(name, function(err, result){
-    if(err != null){
-      res.send("error in server !");
+    if(err){
+      next(err);
     }else{
       if(result == null){
         res.send(true);

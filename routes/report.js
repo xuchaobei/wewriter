@@ -26,7 +26,7 @@ router.get('/search', function(req, res, next) {
         },
         function(err, result){
             if(err){
-                throw err;
+                return next(err);
             }else{
                 res.json(result);
             }

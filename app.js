@@ -27,7 +27,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 //app.use(favicon());
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -66,6 +66,14 @@ function init() {
     app.use('/record-activity', activity);
     app.use('/user', user);
     app.use('/report', report);
+
+    // catch 404 and forward to error handler
+    app.use(function(req, res, next) {
+        console.log('not found');
+        var err = new Error('Not Found');
+        err.status = 404;
+        next(err);
+    });
 
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);

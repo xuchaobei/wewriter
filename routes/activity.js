@@ -9,14 +9,17 @@ var async = require('async');
 var dbPool = require('../models/db');
 var CommonUtil = require('../utils/common');
 
-router.get("/:user", function (req, res) {
+router.get("/:user", function (req, res, next) {
     var userId = decodeURIComponent(req.params.user);
     Report.getDefaultByUserId(userId, function (err, report) {
+        if(err){
+            return next(err);
+        }
         res.render('feedback', {report: report});
     });
 });
 
-router.post("/", function (req, res) {
+router.post("/", function (req, res, next) {
     var userName = CommonUtil.trim(req.body.name);
     var userId = base64.encode(userName);
     var record = new Record({
@@ -43,14 +46,16 @@ router.post("/", function (req, res) {
 
     dbPool.getConnection(function(err, connection) {
         if (err) {
-            console.log('record save failed');
-            req.flash('message', err);
-            return res.redirect('/activity');
+            console.log('record save failed: '+ JSON.stringify(record));
+            connection.release();
+            return next(err);
         }
 
         connection.beginTransaction(function (err) {
             if (err) {
-                throw err;
+                console.log('record save failed: '+ JSON.stringify(record));
+                connection.release();
+                return next(err);
             }
 
             async.series([
@@ -83,19 +88,24 @@ router.post("/", function (req, res) {
                 }
             ], function (err, results) {
                 if (err) {
-                    console.log('record save failed');
-                    req.flash('message', err);
-                    connection.rollback();
-                    return res.redirect('/activity');
+                    console.log('record save failed: '+ JSON.stringify(record));
+                    connection.rollback(function () {
+                        if(err.message){
+                            req.flash('message',err);
+                            res.redirect('/activity');
+                        }else{
+                            next(err);
+                        }
+                    });
                 } else {
-                    console.log('record save success');
                     connection.commit(function (err) {
                         if (err) {
-                            return connection.rollback(function () {
-                                throw err;
+                            connection.rollback(function () {
+                                next(err);
                             });
+                        }else{
+                            res.redirect('/record/' + encodeURIComponent(userId));
                         }
-                        res.redirect('/record/' + encodeURIComponent(userId));
                     });
                 }
                 connection.release();

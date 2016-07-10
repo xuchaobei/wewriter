@@ -28,7 +28,7 @@ Record.prototype.save = function save(conn, callback) {
         function checkRecordOfToday(callback) {
             queryByUserAndDate(record.user_name, record.date, function(err, rows){
                 if (rows && rows.length != 0) {
-                    var err = { code : 1};   //重复打卡错误
+                    var err = { message : "您今天已经打过卡,不能重复打卡!"};   //重复打卡错误
                     callback(err);
                 } else {
                     callback(null);
@@ -41,7 +41,6 @@ Record.prototype.save = function save(conn, callback) {
 
     ], function (err, results) {
         if (err) {
-            console.error(err);
             callback(err);
             //throw err;
         } else {
