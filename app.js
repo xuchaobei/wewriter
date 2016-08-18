@@ -62,7 +62,6 @@ function init() {
     app.get('/', root);
     app.get('/activity', root);
     app.use('/record', record);
-    app.use('/record/:user', record);
     app.use('/record-activity', activity);
     app.use('/user', user);
     app.use('/report', report);
