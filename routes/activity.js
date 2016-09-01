@@ -22,7 +22,7 @@ router.get("/:user", function (req, res, next) {
 router.post("/", function (req, res, next) {
     var userName = CommonUtil.trim(req.body.name);
     if(userName.length == 0){
-        req.flash('message','昵称不能为空!');
+        req.flash('message', { message : '笔名不能为空!'});
         res.redirect('/activity');
         return;
     }

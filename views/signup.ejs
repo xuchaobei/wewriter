@@ -1,0 +1,28 @@
+<% include header.ejs %>
+<h4 class="text-center" style="color:#337ab7">21天写作报名 (第2期)</h4>
+<br>
+<form action="/signup" method="post" class="col-xs-12" >
+  <div class="form-group">
+    <label for="name">笔名</label><img src="images/required.png" class="required"/>
+    <input type="text" required class="form-control" name="name">
+  </div>
+  <div class="form-group">
+    <label for="existed">是否曾经使用该笔名在"笔耕不辍"公众号中打卡</label><img src="images/required.png" class="required"/>
+    <div class="checkbox">
+      <label class="radio-inline">
+        <input type="radio" name="existed" value="true"> 是
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="existed" value="false"> 否
+      </label>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary">提交</button>
+</form>
+
+<% if(error) {%>
+  <p class="col-xs-12 text-danger"><%= error %></p>
+<% } %>
+
+<% include footer.ejs %>

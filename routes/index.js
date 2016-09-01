@@ -8,11 +8,11 @@ router.get('/', function(req, res, next) {
   res.render('index', {error: message});
 });
 
-router.get('/activity', function(req, res, next) {
+/*router.get('/activity', function(req, res, next) {
   var err = req.flash('message');
   var message = err.length > 0 ? err[0].message : null;
   res.render('activity', {error: message});
-});
+});*/
 
 module.exports = router;
 

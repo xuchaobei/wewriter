@@ -23,6 +23,7 @@ UserActivity.prototype.save = function(conn, callback){
                 };
                 insert(conn, userActivity, callback);
             }else{
+                //若记录存在,忽略此次请求
                 callback(null);
             }
         }

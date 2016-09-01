@@ -8,6 +8,8 @@ var express = require('express')
     , user = require('./routes/user')
     , activity =require('./routes/activity')
     , report =require('./routes/report')
+    , signup =require('./routes/signup')
+    , message =require('./routes/message')
     , http = require('http')
     , path = require('path')
     , qs = require('querystring')
@@ -61,10 +63,12 @@ if (app.get('env') === 'production') {
 function init() {
     app.get('/', root);
     app.get('/activity', root);
+    app.use('/signup', signup);
     app.use('/record', record);
     app.use('/record-activity', activity);
     app.use('/user', user);
     app.use('/report', report);
+    app.use('/message', message);
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
