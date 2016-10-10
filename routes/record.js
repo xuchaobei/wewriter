@@ -7,6 +7,8 @@ var base64 = require('base64-url');
 var async = require('async');
 var dbPool = require('../models/db');
 var CommonUtil = require('../utils/common');
+var Date = require('../utils/date');
+
 
 router.get("/:user", function (req, res, next) {
     var userId = decodeURIComponent(req.params.user);
@@ -26,13 +28,17 @@ router.post("/", function (req, res, next) {
         return;
     }
     var userId = base64.encode(userName);
+    date = req.body.date;
+    //如果参数Date是不合法格式，使用当前日期
+    if( ! /\d{4}-\d{2}-\d{2}/.test(date) ){
+        date = new Date(new Date()).Format('yyyy-MM-dd');
+    }
     var record = new Record({
         userId: userId,
         userName: userName,
-        date: req.body.date,
+        date: date,
         title: CommonUtil.trim(req.body.title),
         wordCount: CommonUtil.trim(req.body.word_count)
-
     });
 
     var user = new User({
