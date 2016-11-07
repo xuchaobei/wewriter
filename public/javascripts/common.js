@@ -45,4 +45,27 @@ $(document).ready(function(){
             $("#result tbody").append($tr);
         }
     }
+
+    $("#undoneSearch").click(function(){
+        var date = $('#date').val();
+
+        $.getJSON("undonesearch",
+            {
+                date: date,
+            },
+            function(result){
+                setUndoneResult(result);
+            }
+        );
+    });
+
+    function setUndoneResult(data){
+        $("#result tbody").empty();
+        for(var i = 0; i < data.length; i++){
+            $tr = $('<tr></tr>');
+            $('<td>'+ (i+1) + '</td>').appendTo($tr);
+            $('<td>'+ data[i].user_name + '</td>').appendTo($tr);
+            $("#result tbody").append($tr);
+        }
+    }
 });

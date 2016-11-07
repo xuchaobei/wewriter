@@ -5,8 +5,11 @@ var qs = require('querystring');
 var record = require('../models/record');
 
 router.get('/', function(req, res, next) {
-
     res.render('report');
+});
+
+router.get('/undone', function(req, res, next) {
+    res.render('undone');
 });
 
 router.get('/search', function(req, res, next) {
@@ -23,6 +26,25 @@ router.get('/search', function(req, res, next) {
             endDate: endDate,
             name: name,
             ifMember: ifMember
+        },
+        function(err, result){
+            if(err){
+                return next(err);
+            }else{
+                res.json(result);
+            }
+        }
+    );
+
+});
+
+router.get('/undonesearch', function(req, res, next) {
+    var queryUrl = url.parse(req.url).query ;
+    var params = qs.parse(queryUrl);
+    var date = params.date;
+    record.getUndone(
+        {
+            date: date
         },
         function(err, result){
             if(err){
