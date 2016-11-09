@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
   var userId = base64.encode(userName);
   var userActivity = new UserActivity({
     userId : userId,
-    activityId : 2
+    activityId : 4
   });
   if(exsited === "false"){
     User.getByName(userName, function(err, result){
