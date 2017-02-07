@@ -26,7 +26,7 @@ Report.getDefaultByUserId = function getDefaultByUserId(userId, callback){
             });
             callback(null, report);
         }else{
-            callback(null);
+            callback("无数据");
         }
     });
 

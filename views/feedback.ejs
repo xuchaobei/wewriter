@@ -1,10 +1,8 @@
-<% include header.ejs %>
-    <div class="container text-center">
-        <img src="/images/success.png">
+
+    <div id="feedback" class="container hidden text-center text-info">
         <h1>打卡成功</h1>
+        <h4>您已连续打卡<span id="continuous_count" class="text-stress"></span>天</h4>
+        <h4>累计打卡<span id="total_count" class="text-stress"></span>天</h4>
+        <h4>累计写作字数<span id="word_count" class="text-stress"></span>字</h4>
         <br/>
-        <h4>您已连续打卡<span id="continuous_count" class="text-stress"><%= report ? report.continuousCount : 0 %></span>天</h4>
-        <h4>累计打卡<span id="total_count" class="text-stress"><%=  report ? report.totalCount : 0 %></span>天</h4>
-        <h4>累计写作字数<span id="total_count" class="text-stress"><%= report ? report.totalWords: 0 %></span>字</h4>
     </div>
-<% include footer.ejs %>

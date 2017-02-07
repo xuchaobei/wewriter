@@ -11,12 +11,18 @@ var Date = require('../utils/date');
 
 
 router.get("/:user", function (req, res, next) {
-    var userId = decodeURIComponent(req.params.user);
+    var userName = CommonUtil.trim(decodeURIComponent(req.params.user));
+    var userId = base64.encode(userName);
+    //var userId = decodeURIComponent(req.params.user);
     Report.getDefaultByUserId(userId, function (err, report) {
         if(err){
-            return next(err);
+            //return next(err);
+            res.json({'message' : err});
+        }else{
+            // res.render('feedback', {report: report});
+            console.dir(report);
+            res.json({'code':2000, 'continuousCount': report.continuousCount, 'totalCount': report.totalCount, 'totalWords': report.totalWords});
         }
-        res.render('feedback', {report: report});
     });
 });
 
@@ -87,20 +93,24 @@ router.post("/", function (req, res, next) {
                     console.log('record save failed: '+ JSON.stringify(record));
                     connection.rollback(function () {
                         if(err.message){
-                            req.flash('message',err);
-                            res.redirect('/');
+                            //req.flash('message',err);
+                            //res.redirect('/activity');
+                            res.json({'message': err.message});
                         }else{
-                            next(err);
+                            // next(err);
+                            res.json({'message': '程序异常，打卡失败'});
                         }
                     });
                 } else {
                     connection.commit(function (err) {
                         if (err) {
                             connection.rollback(function () {
-                                next(err);
+                                //next(err);
+                                res.json({'message': '程序异常，打卡失败'});
                             });
                         }else{
-                            res.redirect('/record/' + encodeURIComponent(userId));
+                            //res.redirect('/record/' + encodeURIComponent(userId));
+                            res.json({'code':'2000'});
                         }
                     });
                 }

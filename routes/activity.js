@@ -9,16 +9,6 @@ var async = require('async');
 var dbPool = require('../models/db');
 var CommonUtil = require('../utils/common');
 
-router.get("/:user", function (req, res, next) {
-    var userId = decodeURIComponent(req.params.user);
-    Report.getDefaultByUserId(userId, function (err, report) {
-        if(err){
-            return next(err);
-        }
-        res.render('feedback', {report: report});
-    });
-});
-
 router.post("/", function (req, res, next) {
     var userName = CommonUtil.trim(req.body.name);
     if(userName.length == 0){
@@ -45,7 +35,7 @@ router.post("/", function (req, res, next) {
 
     var userActivity = new UserActivity({
         userId : userId,
-        activityId : 3
+        activityId : 5
     });
 
 
@@ -96,20 +86,24 @@ router.post("/", function (req, res, next) {
                     console.log('record save failed: '+ JSON.stringify(record));
                     connection.rollback(function () {
                         if(err.message){
-                            req.flash('message',err);
-                            res.redirect('/activity');
+                            //req.flash('message',err);
+                            //res.redirect('/activity');
+                            res.json({'message': err.message});
                         }else{
-                            next(err);
+                            // next(err);
+                            res.json({'message': '程序异常，打卡失败'});
                         }
                     });
                 } else {
                     connection.commit(function (err) {
                         if (err) {
                             connection.rollback(function () {
-                                next(err);
+                                //next(err);
+                                res.json({'message': '程序异常，打卡失败'});
                             });
                         }else{
-                            res.redirect('/record/' + encodeURIComponent(userId));
+                            //res.redirect('/record/' + encodeURIComponent(userId));
+                            res.json({'code':'2000'});
                         }
                     });
                 }

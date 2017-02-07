@@ -1,13 +1,13 @@
 <% include header.ejs %>
 <h4 class="text-center" style="color:#337ab7">21天爱上写作</h4>
-<form action="/record-activity" method="post" class="col-xs-12" >
+<form action="/record-activity" method="post" class="main-form">
   <div class="form-group">
     <label for="date">记录时间</label>
     <input type="text" class="form-control" name="date" id="date" readonly>
   </div>
   <div class="form-group">
-    <label for="name">微信昵称</label><img src="images/required.png" class="required"/>
-    <label class="text-warning">(首次打卡请先检测昵称是已否被占用)</label>
+    <label for="name">笔名</label><img src="images/required.png" class="required"/>
+    <label class="text-warning">(首次打卡请先检测笔名是已否被占用)</label>
     <div class="input-group">
       <input type="text" required class="form-control" name="name"><span id="check" class="input-group-addon btn">检测</span>
     </div>
@@ -20,13 +20,15 @@
     <label for="word_count">写作字数</label>
     <input type="number" required class="form-control" name="word_count">
   </div>
-  <button type="submit" class="btn btn-primary">打卡</button>
+  <button type="button" id="record_activity" class="btn btn-primary">打卡</button>
 </form>
 
-<p id="tips" class="col-xs-12 hidden"></p>
+<div id="tips" class="alert alert-info hidden" role="alert">
+</div>
 
 <% if(error) {%>
-  <p class="col-xs-12 text-danger"><%= error %></p>
+  <p id="error" class="col-xs-12 text-danger"><%= error %></p>
 <% } %>
 
+<% include feedback.ejs %>
 <% include footer.ejs %>

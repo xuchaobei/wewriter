@@ -19,7 +19,6 @@ router.get('/search', function(req, res, next) {
     var endDate = params.endDate;
     var name = decodeURIComponent(params.name);
     var ifMember = params.ifMember;
-    console.log(startDate+"-"+endDate+'-'+name+'-'+ifMember);
     record.get(
         {
             startDate: startDate,
