@@ -90,8 +90,7 @@ function insert(conn, record, callback) {
 Record.getUndone = function(param, callback){
     var date = param.date;
     var sql = "select user_name from `user` u, user_activity ua " +
-    "where u.user_id = ua.user_id and ua.activity_id = 4 and ua.user_id not in (select user_id from record where `date`='"+ date +"' )";
-    console.log(sql);
+    "where u.user_id = ua.user_id and ua.activity_id = 5 and ua.user_id not in (select user_id from record where `date`='"+ date +"' )";
     dbPool.query(sql, callback);
 }
 
