@@ -35,7 +35,7 @@ router.post("/", function (req, res, next) {
 
     var userActivity = new UserActivity({
         userId : userId,
-        activityId : 5
+        activityId : 6
     });
 
 
