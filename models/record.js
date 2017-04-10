@@ -57,7 +57,7 @@ Record.get = function get(param, callback){
     var ifMember = param.ifMember;
 
     if(ifMember == 'true'){
-        sql = sql + 'join user_activity u where r.user_id = u.user_id and u.activity_id = 6 ';
+        sql = sql + 'join user_activity u where r.user_id = u.user_id and u.activity_id = 7 ';
     }
     if((name && name.length>0)){
         if(ifMember == 'true'){
@@ -90,7 +90,7 @@ function insert(conn, record, callback) {
 Record.getUndone = function(param, callback){
     var date = param.date;
     var sql = "select user_name from `user` u, user_activity ua " +
-    "where u.user_id = ua.user_id and ua.activity_id = 6 and ua.user_id not in (select user_id from record where `date`='"+ date +"' )";
+    "where u.user_id = ua.user_id and ua.activity_id = 7 and ua.user_id not in (select user_id from record where `date`='"+ date +"' )";
     dbPool.query(sql, callback);
 }
 
