@@ -13,13 +13,22 @@ var Date = require('../utils/date');
 router.get("/:user", function (req, res, next) {
     var userName = CommonUtil.trim(decodeURIComponent(req.params.user));
     var userId = base64.encode(userName);
-    //var userId = decodeURIComponent(req.params.user);
     Report.getDefaultByUserId(userId, function (err, report) {
         if(err){
-            //return next(err);
             res.json({'message' : err});
         }else{
-            // res.render('feedback', {report: report});
+            console.dir(report);
+            res.json({'code':2000, 'continuousCount': report.continuousCount, 'totalCount': report.totalCount, 'totalWords': report.totalWords});
+        }
+    });
+});
+
+router.get("/mini/:user", function (req, res, next) {
+    var userId = req.params.user;
+    Report.getDefaultByUserId(userId, function (err, report) {
+        if(err){
+            res.json({'message' : err});
+        }else{
             console.dir(report);
             res.json({'code':2000, 'continuousCount': report.continuousCount, 'totalCount': report.totalCount, 'totalWords': report.totalWords});
         }
@@ -33,8 +42,17 @@ router.post("/", function (req, res, next) {
         res.redirect('/');
         return;
     }
-    var userId = base64.encode(userName);
-    date = req.body.date;
+    var userId;
+    if(!req.body.user) {
+      var userId = base64.encode(userName);
+    }else{
+      userId = req.body.user;
+    }
+    if(!userId){
+        res.json({'message': '无法获取用户ID，请尝试重新打开小程序'});
+        return;
+    }
+    var date = req.body.date;
     //如果参数Date是不合法格式，使用当前日期
     if( ! /\d{4}-\d{2}-\d{2}/.test(date) ){
         date = new Date(new Date()).Format('yyyy-MM-dd');
@@ -123,8 +141,3 @@ router.post("/", function (req, res, next) {
 });
 
 module.exports = router;
-
-
-
-
-

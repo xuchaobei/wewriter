@@ -10,6 +10,7 @@ var express = require('express')
     , report =require('./routes/report')
     , signup =require('./routes/signup')
     , message =require('./routes/message')
+    , trainingCamp = require('./routes/trainingCamp')
     , http = require('http')
     , path = require('path')
     , qs = require('querystring')
@@ -20,7 +21,6 @@ var express = require('express')
     , logger = require('morgan')
     , flash = require('connect-flash')
     , session = require("express-session")
-    , cookieParser = require('cookie-parser')
     , compression = require('compression');
 
 var app = express();
@@ -36,7 +36,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 // app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
-app.use(cookieParser());
+//app.use(cookieParser());
 /*app.use(session({
     genid: function(req) {
         return new Date();
@@ -46,9 +46,9 @@ app.use(cookieParser());
     saveUninitialized:true
 }));*/
 
-app.use(session({ resave: true,
+app.use(session({ resave: false,
     saveUninitialized: true,
-    secret: 'uwotm8' }));
+    secret: 'atom' }));
 
 if (app.get('env') === 'development') {
     console.log('Using development settings.');
@@ -69,6 +69,7 @@ function init() {
     app.use('/user', user);
     app.use('/report', report);
     app.use('/message', message);
+    app.use('/camp', trainingCamp);
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {

@@ -12,4 +12,16 @@ function Activity(activity){
     this.active = activity.active;
 }
 
+Activity.getCurrentTerm = function(callback) {
+  dbPool.query('select * from activity where active = 1', function(err, rows){
+      if(err){
+          callback(err);
+      }else if(rows && rows.length > 0){
+          callback(null, rows[0].activity);
+      }else{
+          callback(null, 0);
+      }
+  });
+}
+
 module.exports = Activity;

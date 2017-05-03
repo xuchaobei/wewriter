@@ -30,6 +30,20 @@ UserActivity.prototype.save = function(conn, callback){
     });
 };
 
+UserActivity.checkIfRegistered = function(userId, activityId, callback){
+    query(userId, activityId, function(err, rows){
+      if(err){
+          callback(err);
+      }else{
+          if(rows.length == 0){
+              callback(null, false);
+          }else{
+              callback(null, true);
+          }
+      }
+    });
+}
+
 function query(userId, activityId, callback){
     dbPool.query("select * from user_activity where user_id = ? and activity_id = ?", [userId, activityId], callback);
 }
