@@ -57,7 +57,7 @@ Record.get = function get(param, callback){
     var ifMember = param.ifMember;
 
     if(ifMember == 'true'){
-        sql = sql + 'join user_activity u where r.user_id = u.user_id and u.activity_id = 7 ';
+        sql = sql + 'join user_activity u where r.user_id = u.user_id and u.activity_id = 9 ';
     }
     if((name && name.length>0)){
         if(ifMember == 'true'){
