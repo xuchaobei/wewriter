@@ -191,4 +191,45 @@ $(document).ready(function(){
             $("#result tbody").append($tr);
         }
     }
+
+    $("#saveShare").click(function(){
+        var seq, image_url, quote;
+        seq = $("#seq").val();
+        image_url = $("#image_url").val();
+        quote = $("#quote").val();
+        var intReg = /^\d+$/;
+        if(!(intReg.test(seq) && 0 < parseInt(seq) < 32)){
+            alert("序号必须是介于1到31之间的整数");
+            return;
+        }
+        var urlReg = new RegExp("https?://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]");
+        if(!urlReg.test(image_url)) {
+            alert("图片链接格式不正确");
+            return;
+        }
+        if(!quote || quote.length === 0) {
+            alert("句子内容不能为空");
+            return;
+        }
+        var params = {
+            seq: seq,
+            image_url: image_url ,
+            quote: quote
+        }
+        
+        $.post("share/save",
+            params,
+            function(result){
+                if(result.code == 2000){
+                    alert("保存成功");
+                }else{
+                    if(result.message){
+                        alert("保存失败： "+result.message);
+                    }else{
+                        alert("保存失败：");
+                    }
+                }
+            }
+        ); 
+    })
 });

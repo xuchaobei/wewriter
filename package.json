@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "async": "*",
+    "base64-url": "^1.2.1",
     "body-parser": "~1.13.2",
+    "compression": "^1.6.2",
     "connect-flash": "^0.1.1",
     "ejs": "~2.3.3",
     "express": "~4.13.1",
@@ -17,7 +19,6 @@
     "mysql": "*",
     "node-uuid": "*",
     "serve-favicon": "~2.3.0",
-    "base64-url":"^1.2.1",
-    "compression":"^1.6.2"
+    "webshot": "^0.18.0"
   }
 }

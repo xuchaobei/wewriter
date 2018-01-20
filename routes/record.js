@@ -29,7 +29,6 @@ router.get("/mini/:user", function (req, res, next) {
         if(err){
             res.json({'message' : err});
         }else{
-            console.dir(report);
             res.json({'code':2000, 'continuousCount': report.continuousCount, 'totalCount': report.totalCount, 'totalWords': report.totalWords});
         }
     });
@@ -55,7 +54,7 @@ router.post("/", function (req, res, next) {
     var date = req.body.date;
     //如果参数Date是不合法格式，使用当前日期
     if( ! /\d{4}-\d{2}-\d{2}/.test(date) ){
-        date = new Date(new Date()).Format('yyyy-MM-dd');
+        date = (new Date()).Format('yyyy-MM-dd');
     }
     var record = new Record({
         userId: userId,

@@ -11,6 +11,7 @@ var express = require('express')
     , signup =require('./routes/signup')
     , message =require('./routes/message')
     , trainingCamp = require('./routes/trainingCamp')
+    , share = require('./routes/share')
     , http = require('http')
     , path = require('path')
     , qs = require('querystring')
@@ -70,6 +71,7 @@ function init() {
     app.use('/report', report);
     app.use('/message', message);
     app.use('/camp', trainingCamp);
+    app.use('/share', share);
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+          margin: 0;
+          background-color: white; 
+        }
+        .page {
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        
+        .section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 150px;
+            border-bottom: 1px solid grey;
+        }
+        
+        .section__bg {
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+
+        .section__content {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 40%;
+            font-size: 20px;
+            line-height: 1.5em;
+            color: white;
+        }
+
+        .section__content p {
+            margin: 10px;
+        }
+
+        .section__date {
+            font-size: 18px;
+        }
+        
+        .page__title {
+            position: absolute;
+            width: 250px;
+            margin-left: 62px;
+            margin-right: 63px;
+            text-align: center;
+            bottom: 300px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .page__content {
+            position: absolute;
+            height: 150px;
+            width: calc(50% - 25px);
+            left: 25px;
+            bottom: 0;
+            text-align: left;
+        }
+        
+        .page__portrait {
+            position: relative;
+            width: 200px;
+            height: 50px;
+            top: -25px;
+        }
+        
+        .page__portrait img {
+            border: 1px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .page__nickname {
+            position: relative;
+            width: 100%;
+            height: 15px;
+            top: -20px;
+            font-size: 14px;
+        }
+        
+        .page__desc {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: grey;
+        }
+        
+        .page__detail {
+            font-size: 12px;
+            color: grey;
+        }
+
+        .page__detail p {
+          margin: 2px 0;
+        }
+
+        .page__detail p span {
+          margin-left: 2px;
+          margin-right: 2px; 
+        }
+        
+        .page__qrcode {
+            position: absolute;
+            height: 150px;
+            width: 50%;
+            bottom: 0;
+            right: 0;
+        }
+        
+        .page__qrcode img {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 75px;
+            bottom: 30px;
+        }
+        
+        .page__tip {
+            position: absolute;
+            width: 100px;
+            text-align: center;
+            font-size: 12px;
+            left: 75px;
+            bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="section">
+            <img class="section__bg" src="http://img.hb.aicdn.com/8a2bb7f5a3284f936459cccb46d490b09596589e11470-XCoVUo_fw236"></img>
+            <div class="section__content">
+              <p class="section__date">2018-02-02</p>
+              <p>爱上写作，<br/> 一生笔耕不辍。</br>
+            </div>
+        </div>
+        <div class="page__content">
+            <div class="page__portrait">
+                <img src="https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqrfDIKTJ4KibCJCtWoffCmTXnacTvhwicsnGicxeS4cPXlMwwMolcN8fw4Vtrnf9wpZ9GTNgoOrfZtA/0"></img>
+            </div>
+            <div class="page__nickname">徐超</div>
+            <div class="page__desc">爱上写作，笔耕不辍</div>
+            <div class="page__detail">
+                <p>累计打卡<span>18</span>天</p>
+                <p>连续打卡<span>1</span>天</p>
+                <p>累计写作字数<span>5277</span>字</p>
+            </div>
+        </div>
+        <div class="page__qrcode">
+            <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1516450655765&di=fabb15f950705dd90127b3e4aecc7153&imgtype=0&src=http%3A%2F%2Fc2.biketo.com%2Fd%2Ffile%2Fproduct%2Fpart%2F2014-10-22%2Fb5e0bfeff64f9eaf9916410d7e27fc16.jpg"></img>
+            <div class="page__tip">
+                长按识别二维码
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
