@@ -42,13 +42,16 @@ router.post('/', function(req, res, next) {
     if(err){
         res.json({message : err});
     }else{
-        var date = (new Date()).Format('yyyy-MM-dd');
+        var date = req.body.date;
         var seq = date.split('-')[2];
         seq = seq.indexOf('0') === 0 ? seq.substring(1) : seq ;
         Share.get(seq, function(err, share){
           if(err) {
             res.send({message:'生成日签失败' });
           } else {
+            if(!share || !share.quote) {
+              res.send({message:'生成日签失败' });
+            }
             var sentences = share.quote.replace(/,/g,'，').split('，');
             var length = sentences.length;
             for(var i = 0; i < length; i ++ ) {
@@ -92,7 +95,7 @@ function generatePic(userId, html, res) {
       console.log(`error: ${err}`);
       res.send({message:'生成日签失败' });
     } else {
-      var url = 'http://wewriter.ga/images/share/' + userId + '.png?ts=' + new Date().getTime();
+      var url = 'http://wewriter.xin/images/share/' + userId + '.png?ts=' + new Date().getTime();
       // var url = 'http://192.168.100.105:3000/images/share/' + userId + '.png?ts=' + new Date().getTime();
       res.send({code:2000, url: url });
     } 

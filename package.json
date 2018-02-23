@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "dev": "NODE_ENV=development node app",
     "start": "node app"
   },
   "dependencies": {

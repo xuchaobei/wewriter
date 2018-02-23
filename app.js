@@ -13,6 +13,8 @@ var express = require('express')
     , trainingCamp = require('./routes/trainingCamp')
     , share = require('./routes/share')
     , http = require('http')
+    , https = require('https')
+    , fs = require('fs')
     , path = require('path')
     , qs = require('querystring')
     , mysql = require('mysql')
@@ -92,6 +94,15 @@ function init() {
     http.createServer(app).listen(app.get('port'), function () {
         console.log("Express server listening on port " + app.get('port'));
     });
+
+    // if(process.env.NODE_ENV !== 'development') {
+    //     const options = {
+    //         key: fs.readFileSync('/root/cert/214515885180029.key'),
+    //         cert: fs.readFileSync('/root/cert/214515885180029.pem'),
+    //     };
+          
+    //     https.createServer(app).listen(443);
+    // }
 }
 
 init();
