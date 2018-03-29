@@ -96,7 +96,7 @@ function generatePic(userId, html, res) {
       res.send({message:'生成日签失败' });
     } else {
       var url = 'http://wewriter.xin/images/share/' + userId + '.png?ts=' + new Date().getTime();
-      // var url = 'http://192.168.100.105:3000/images/share/' + userId + '.png?ts=' + new Date().getTime();
+      // var url = 'http://172.16.47.237:3000/images/share/' + userId + '.png?ts=' + new Date().getTime();
       res.send({code:2000, url: url });
     } 
   })
