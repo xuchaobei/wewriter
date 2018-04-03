@@ -5,17 +5,19 @@
 var async = require('async');
 var dbPool = require('./db');
 
-function Share(seq, imageUrl, quote){
+function Share(seq, imageUrl, quote, author){
     this.seq = parseInt(seq) ;
     this.imageUrl = imageUrl;
     this.quote = quote;
+    this.author = author;
 }
 
 Share.prototype.save = function(callback) {
   var share = {
     seq: this.seq,
     image_url: this.imageUrl,
-    quote: this.quote
+    quote: this.quote,
+    author: this.author
   }
   queryById(this.seq, function(err, data){
     if(err) {

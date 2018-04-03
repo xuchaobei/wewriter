@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         body {
-            margin: 0;
-            background-color: white;
+          margin: 0;
+          background-color: white; 
+          font-family: "WenQuanYi Micro Hei", sans-serif, monospace;
         }
-        
         .page {
             text-align: center;
             width: 100%;
@@ -33,23 +33,29 @@
             height: 100%;
             opacity: 0.8;
         }
-        
+
         .section__content {
             position: absolute;
             width: 100%;
             text-align: center;
-            top: 40%;
+            top: 35%;
             font-size: 20px;
             line-height: 1.5em;
             color: white;
         }
-        
+
         .section__content p {
             margin: 10px;
         }
-        
+
         .section__date {
             font-size: 18px;
+        }
+
+        .section__author {
+            font-size: 16px;
+            text-align: right;
+            padding-right: 30px;
         }
         
         .page__title {
@@ -97,21 +103,21 @@
         .page__desc {
             font-size: 14px;
             margin-bottom: 5px;
-            color:#525252;
+            color:#3c3b3b;
         }
         
         .page__detail {
             font-size: 12px;
-            color:#525252;
+            color:#3c3b3b;
         }
-        
+
         .page__detail p {
-            margin: 1px 0;
+          margin: 1px 0;
         }
-        
+
         .page__detail p span {
-            margin-left: 2px;
-            margin-right: 2px;
+          margin-left: 2px;
+          margin-right: 2px; 
         }
         
         .page__qrcode {
@@ -153,6 +159,7 @@
                         <br/>
                     <% } %>
                 </p>
+                <p class="section__author">—&nbsp;&nbsp;<%= author %></br>
             </div>
         </div>
         <div class="page__content">

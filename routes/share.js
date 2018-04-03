@@ -26,7 +26,7 @@ router.get('/', function(req, res, next) {
 })
 
 router.post('/save', function(req, res, next) {
-  var share = new Share(req.body.seq, req.body.image_url, req.body.quote);
+  var share = new Share(req.body.seq, req.body.image_url, req.body.quote, req.body.author);
   share.save(function(err){
     if(err) {
       res.json({message: err});
@@ -63,6 +63,7 @@ router.post('/', function(req, res, next) {
               date: date,
               imageUrl: share.image_url,
               sentences: sentences,
+              author: share.author,
               nickName: req.body.nickName,
               avatarUrl: req.body.avatarUrl,
               continuousCount: report.continuousCount,

@@ -193,10 +193,11 @@ $(document).ready(function(){
     }
 
     $("#saveShare").click(function(){
-        var seq, image_url, quote;
+        var seq, image_url, quote, author;
         seq = $("#seq").val();
         image_url = $("#image_url").val();
         quote = $("#quote").val();
+        author = $("#author").val();
         var intReg = /^\d+$/;
         if(!(intReg.test(seq) && 0 < parseInt(seq) < 32)){
             alert("序号必须是介于1到31之间的整数");
@@ -211,10 +212,15 @@ $(document).ready(function(){
             alert("句子内容不能为空");
             return;
         }
+        if(!author || author.length === 0) {
+            alert("句子内容不能为空");
+            return;
+        }
         var params = {
             seq: seq,
             image_url: image_url ,
-            quote: quote
+            quote: quote,
+            author: author
         }
         
         $.post("share/save",
