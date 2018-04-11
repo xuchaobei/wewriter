@@ -7,10 +7,10 @@
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-        body {
+         body {
           margin: 0;
           background-color: white; 
-          font-family: "WenQuanYi Micro Hei", sans-serif, monospace;
+          font-family: "WenQuanYi Zen Hei", sans-serif, monospace;
         }
         .page {
             text-align: center;
@@ -31,15 +31,13 @@
         .section__bg {
             width: 100%;
             height: 100%;
-            opacity: 0.8;
         }
 
         .section__content {
             position: absolute;
             width: 100%;
             text-align: center;
-            top: 35%;
-            font-size: 20px;
+            top: 30%;
             line-height: 1.5em;
             color: white;
         }
@@ -48,16 +46,36 @@
             margin: 10px;
         }
 
+        .section_mask {
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left:0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.15)
+        }
+
         .section__date {
-            font-size: 18px;
+            font-size: 20px;
+            color: rgb(240, 240, 240);
+            letter-spacing: 2px;
+            margin-bottom: 20px !important; 
         }
 
         .section__author {
             font-size: 16px;
             text-align: right;
             padding-right: 30px;
+            color: rgb(240, 240, 240);
+            letter-spacing: 2px;
         }
-        
+
+        .section__sentence {
+            letter-spacing: 4px;
+            font-size: 22px;
+            line-height: 1.5em;
+        }
+
         .page__title {
             position: absolute;
             width: 250px;
@@ -151,15 +169,17 @@
     <div class="page">
         <div class="section">
             <img class="section__bg" src="<%= imageUrl %>"></img>
-            <div class="section__content">
-                <p class="section__date"><%= date %></p>
-                <p>
-                    <% for(var i=0; i<sentences.length; i++) { %>
-                        <%= sentences[i] %>
-                        <br/>
-                    <% } %>
-                </p>
-                <p class="section__author">—&nbsp;&nbsp;<%= author %></br>
+            <div class="section_mask">
+                <div class="section__content">
+                        <p class="section__date"><%= date %></p>
+                        <p class="section__sentence">
+                            <% for(var i=0; i<sentences.length; i++) { %>
+                                <%= sentences[i] %>
+                                <br/>
+                            <% } %>
+                        </p>
+                        <p class="section__author">—&nbsp;&nbsp;<%= author %></br></p>
+                </div>
             </div>
         </div>
         <div class="page__content">

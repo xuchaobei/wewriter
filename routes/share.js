@@ -52,11 +52,11 @@ router.post('/', function(req, res, next) {
             if(!share || !share.quote) {
               res.send({message:'生成日签失败' });
             }
-            var sentences = share.quote.replace(/,/g,'，').split('，');
+            var sentences = share.quote.replace(/,/g,'，').replace(/[\.。]$/g,'').split('，');
             var length = sentences.length;
             for(var i = 0; i < length; i ++ ) {
               if(i !== length - 1) {
-                sentences[i] = sentences[i] + '，';
+                sentences[i] = sentences[i];
               }
             }
             var templateData = {

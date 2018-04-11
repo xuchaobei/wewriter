@@ -10,7 +10,7 @@
         body {
           margin: 0;
           background-color: white; 
-          font-family: "WenQuanYi Micro Hei", sans-serif, monospace;
+          font-family: "WenQuanYi Zen Hei", sans-serif, monospace;
         }
         .page {
             text-align: center;
@@ -31,15 +31,13 @@
         .section__bg {
             width: 100%;
             height: 100%;
-            opacity: 0.8;
         }
 
         .section__content {
             position: absolute;
             width: 100%;
             text-align: center;
-            top: 35%;
-            font-size: 20px;
+            top: 30%;
             line-height: 1.5em;
             color: white;
         }
@@ -48,14 +46,36 @@
             margin: 10px;
         }
 
-        .section__date {
-            font-size: 18px;
+        .section_mask {
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left:0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.15)
         }
+
+        .section__date {
+            font-size: 20px;
+            color: rgb(240, 240, 240);
+            letter-spacing: 2px;
+            margin-bottom: 20px !important; 
+        }
+
         .section__author {
             font-size: 16px;
             text-align: right;
             padding-right: 30px;
+            color: rgb(240, 240, 240);
+            letter-spacing: 2px;
         }
+
+        .section__sentence {
+            letter-spacing: 4px;
+            font-size: 22px;
+            line-height: 1.5em;
+        }
+
         .page__title {
             position: absolute;
             width: 250px;
@@ -148,11 +168,13 @@
 <body>
     <div class="page">
         <div class="section">
-            <img class="section__bg" src="http://p3tfrakck.bkt.clouddn.com/base/qrcode.jpg"></img>
-            <div class="section__content">
-              <p class="section__date">2018-02-02</p>
-              <p>爱上写作，<br/> 一生笔耕不辍。</br>
-              <p class="section__author">—&nbsp;&nbsp;《时间的格局》</br>
+            <img class="section__bg" src="pic.jpeg"></img>
+            <div class="section_mask">
+                <div class="section__content">
+                <p class="section__date">2018-02-02</p>
+                <p class="section__sentence">喜欢的事<br/> 自然可以坚持下去</br></p>
+                <p class="section__author">—&nbsp;&nbsp;村上春树</br></p>
+                </div>
             </div>
         </div>
         <div class="page__content">
