@@ -1,201 +1,191 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test2</title>
     <style>
-        body {
-          margin: 0;
-          background-color: white; 
-          font-family: "WenQuanYi Zen Hei", sans-serif, monospace;
-        }
-        .page {
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-        }
-        
-        .section {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 150px;
-            border-bottom: 1px solid grey;
-        }
-        
-        .section__bg {
-            width: 100%;
-            height: 100%;
-        }
+       html {
+        height: 100%;
+      }
+      
+      body {
+        margin: 0;
+        font-family: "WenQuanYi Zen Hei", sans-serif, monospace;
+        font-size: 16px;
+        height: 100%;
+        background-color: white;
+      }
+      
+      .b-main-section {
+        height: calc(100% - 150px);
+        background-image: url("http://p3tfrakck.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20180412001109.jpg");
+        background-size: 100% 100%;
+      }
+      
+      .b-main-section__avatar{
+        position: absolute;
+        margin-top: -25px;
+        margin-left: 25px;
+      }
+            
+      .b-avatar {
+        width: 50px;
+        text-align: center;
+        font-size: 0.8rem;
+        color: #3c3b3b;
+      }
+      
+      .b-avatar__pic {
+        border: 1px solid white;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      }
+      
+      .b-central-container {
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.2);
+        background-size: 100% 100%;
+        font-size: 0;
+        text-align: center;
+      }
+      
+      .b-central-container:after {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+      
+      .b-central-container__content {
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+        height: 40%;
+        width: 90%;
+       
+      }
+      
+      .b-central-container__paragraph {
+        width: 100%;
+        margin: 1rem 0;
+        line-height: 2;
+        letter-spacing: 0.2rem;
+        color: white;
+        font-size: 1rem;
+      }
+      
+      .b-central-container__paragraph--align-right {
+        text-align: right;
+      }
 
-        .section__content {
-            position: absolute;
-            width: 100%;
-            text-align: center;
-            top: 30%;
-            line-height: 1.5em;
-            color: white;
-        }
+      .b-central-container__paragraph--font-large {
+        font-size: 1.2rem;
+      }
 
-        .section__content p {
-            margin: 10px;
-        }
+      .b-central-container__paragraph--font-xlarge {
+        font-size: 1.3rem;
+      }
+      
+      .b-secondary-section {
+        height: 150px;
+        color: #3c3b3b;
+        font-size: 0.8rem;
+      }
+      
+      .b-secondary-section__left {
+        float: left;
+        box-sizing: border-box;
+        width: 55%;
+        height: 100%;
+      }
 
-        .section_mask {
-            position: absolute;
-            top:0;
-            bottom: 0;
-            left:0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.15)
-        }
+      .b-secondary-section__statistics {
+        margin-top: 60px;
+        margin-left: 25px;
+      }
 
-        .section__date {
-            font-size: 20px;
-            color: rgb(240, 240, 240);
-            letter-spacing: 2px;
-            margin-bottom: 20px !important; 
-        }
+      .b-secondary-section__title {
+        font-size: 0.9rem;
+        font-weight: bold;
+        margin: 2px 0;
+      }
 
-        .section__author {
-            font-size: 16px;
-            text-align: right;
-            padding-right: 30px;
-            color: rgb(240, 240, 240);
-            letter-spacing: 2px;
-        }
+      .b-secondary-section__detail {
+        margin: 3px 0;
+      }
 
-        .section__sentence {
-            letter-spacing: 4px;
-            font-size: 22px;
-            line-height: 1.5em;
-        }
+      .b-secondary-section__data {
+        margin: 0 5px;
+      }
 
-        .page__title {
-            position: absolute;
-            width: 250px;
-            margin-left: 62px;
-            margin-right: 63px;
-            text-align: center;
-            bottom: 300px;
-            font-weight: bold;
-            color: white;
-        }
-        
-        .page__content {
-            position: absolute;
-            height: 150px;
-            width: calc(50% - 25px);
-            left: 25px;
-            bottom: 0;
-            text-align: left;
-        }
-        
-        .page__portrait {
-            position: relative;
-            width: 200px;
-            height: 50px;
-            top: -25px;
-        }
-        
-        .page__portrait img {
-            border: 1px solid white;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-        }
-        
-        .page__nickname {
-            position: relative;
-            width: 100%;
-            height: 15px;
-            top: -20px;
-            font-size: 14px;
-        }
-        
-        .page__desc {
-            font-size: 14px;
-            margin-bottom: 5px;
-            color:#3c3b3b;
-        }
-        
-        .page__detail {
-            font-size: 12px;
-            color:#3c3b3b;
-        }
+      .b-secondary-section__right {
+        float: right;
+        box-sizing: border-box;
+        width: 45%;
+        height: 100%;
+        line-height: 150px;
+        text-align: center;
+      }
 
-        .page__detail p {
-          margin: 1px 0;
-        }
+      .b-secondary-section__qrcode {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 0;
+      }
 
-        .page__detail p span {
-          margin-left: 2px;
-          margin-right: 2px; 
-        }
-        
-        .page__qrcode {
-            position: absolute;
-            height: 150px;
-            width: 50%;
-            bottom: 0;
-            right: 0;
-        }
-        
-        .page__qrcode img {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            left: 75px;
-            bottom: 30px;
-        }
-        
-        .page__tip {
-            position: absolute;
-            width: 100px;
-            text-align: center;
-            font-size: 12px;
-            left: 75px;
-            bottom: 5px;
-        }
+      .b-qrcode {
+        width: 100px;
+      }
+
+      .b-qrcode__pic {
+        width: 100px;
+        height: 100px;
+        vertical-align: middle;
+      }
+
+      .b-qrcode__desc {
+        margin-top: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-    <div class="page">
-        <div class="section">
-            <img class="section__bg" src="pic.jpeg"></img>
-            <div class="section_mask">
-                <div class="section__content">
-                <p class="section__date">2018-02-02</p>
-                <p class="section__sentence">喜欢的事<br/> 自然可以坚持下去</br></p>
-                <p class="section__author">—&nbsp;&nbsp;村上春树</br></p>
-                </div>
-            </div>
-        </div>
-        <div class="page__content">
-            <div class="page__portrait">
-                <img src="https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqrfDIKTJ4KibCJCtWoffCmTXnacTvhwicsnGicxeS4cPXlMwwMolcN8fw4Vtrnf9wpZ9GTNgoOrfZtA/0"></img>
-            </div>
-            <div class="page__nickname">徐超</div>
-            <div class="page__desc">21天爱上写作训练营</div>
-            <div class="page__detail">
-                <p>累计打卡<span>18</span>天</p>
-                <p>连续打卡<span>1</span>天</p>
-                <p>累计写作字数<span>5277</span>字</p>
-            </div>
-        </div>
-        <div class="page__qrcode">
-            <img src="http://p3tfrakck.bkt.clouddn.com/base/qrcode.jpg"></img>
-            <div class="page__tip">
-                长按识别二维码
-            </div>
-        </div>
+  <div class="b-main-section">
+    <div class="b-central-container">
+      <div class="b-central-container__content">
+        <p class="b-central-container__paragraph b-central-container__paragraph--font-large">2018-02-02</p>
+        <p class="b-central-container__paragraph b-central-container__paragraph--font-xlarge">人生中一半的麻烦源于答应得<br> 拒绝得太慢
+        </p>
+        <p class="b-central-container__paragraph b-central-container__paragraph--align-right"><span>—&nbsp;</span><span>《精要主义》</span></p>
+      </div>
     </div>
-</body>
+    <div class="b-avatar b-main-section__avatar">
+        <img class="b-avatar__pic" src="https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqrfDIKTJ4KibCJCtWoffCmTXnacTvhwicsnGicxeS4cPXlMwwMolcN8fw4Vtrnf9wpZ9GTNgoOrfZtA/0" />
+        <div>徐超</div>
+    </div>
+  </div>
+
+  <div class="b-secondary-section">
+    <div class="b-secondary-section__left">
+      <div class="b-secondary-section__statistics">
+        <p class="b-secondary-section__title">21天爱上写作训练营</p>
+        <p class="b-secondary-section__detail">累计打卡<span class="b-secondary-section__data">18</span>天</p>
+        <p class="b-secondary-section__detail">连续打卡<span class="b-secondary-section__data">8</span>天</p>
+        <p class="b-secondary-section__detail">累计写作字数<span class="b-secondary-section__data">18000</span>字</p>
+      </div>
+    </div>
+    <div class="b-secondary-section__right">
+      <div class="b-secondary-section__qrcode b-qrcode">
+          <img class="b-qrcode__pic" src="http://p3tfrakck.bkt.clouddn.com/base/qrcode.jpg" />
+          <div class="b-qrcode__desc">
+            长按识别二维码
+          </div>
+      </div>
+    </div>
+  </div>
+  </body>
 
 </html>

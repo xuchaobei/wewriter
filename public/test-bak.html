@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+          margin: 0;
+          background-color: white; 
+          font-family: "WenQuanYi Zen Hei", sans-serif, monospace;
+        }
+        .page {
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+        
+        .section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 150px;
+            border-bottom: 1px solid grey;
+        }
+        
+        .section__bg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .section__content {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 30%;
+            line-height: 1.5em;
+            color: white;
+        }
+
+        .section__content p {
+            margin: 10px;
+        }
+
+        .section_mask {
+            position: absolute;
+            top:0;
+            bottom: 0;
+            left:0;
+            right: 0;
+            background-color: rgba(0, 0, 0, 0.15)
+        }
+
+        .section__date {
+            font-size: 20px;
+            color: rgb(240, 240, 240);
+            letter-spacing: 2px;
+            margin-bottom: 20px !important; 
+        }
+
+        .section__author {
+            font-size: 16px;
+            text-align: right;
+            padding-right: 30px;
+            color: rgb(240, 240, 240);
+            letter-spacing: 2px;
+        }
+
+        .section__sentence {
+            letter-spacing: 4px;
+            font-size: 22px;
+            line-height: 1.5em;
+        }
+
+        .page__title {
+            position: absolute;
+            width: 250px;
+            margin-left: 62px;
+            margin-right: 63px;
+            text-align: center;
+            bottom: 300px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .page__content {
+            position: absolute;
+            height: 150px;
+            width: calc(50% - 25px);
+            left: 25px;
+            bottom: 0;
+            text-align: left;
+        }
+        
+        .page__portrait {
+            position: relative;
+            width: 200px;
+            height: 50px;
+            top: -25px;
+        }
+        
+        .page__portrait img {
+            border: 1px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .page__nickname {
+            position: relative;
+            width: 100%;
+            height: 15px;
+            top: -20px;
+            font-size: 14px;
+        }
+        
+        .page__desc {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color:#3c3b3b;
+        }
+        
+        .page__detail {
+            font-size: 12px;
+            color:#3c3b3b;
+        }
+
+        .page__detail p {
+          margin: 1px 0;
+        }
+
+        .page__detail p span {
+          margin-left: 2px;
+          margin-right: 2px; 
+        }
+        
+        .page__qrcode {
+            position: absolute;
+            height: 150px;
+            width: 50%;
+            bottom: 0;
+            right: 0;
+        }
+        
+        .page__qrcode img {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 75px;
+            bottom: 30px;
+        }
+        
+        .page__tip {
+            position: absolute;
+            width: 100px;
+            text-align: center;
+            font-size: 12px;
+            left: 75px;
+            bottom: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="section">
+            <img class="section__bg" src="pic.jpeg"></img>
+            <div class="section_mask">
+                <div class="section__content">
+                <p class="section__date">2018-02-02</p>
+                <p class="section__sentence">喜欢的事<br/> 自然可以坚持下去</br></p>
+                <p class="section__author">—&nbsp;&nbsp;村上春树</br></p>
+                </div>
+            </div>
+        </div>
+        <div class="page__content">
+            <div class="page__portrait">
+                <img src="https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqrfDIKTJ4KibCJCtWoffCmTXnacTvhwicsnGicxeS4cPXlMwwMolcN8fw4Vtrnf9wpZ9GTNgoOrfZtA/0"></img>
+            </div>
+            <div class="page__nickname">徐超</div>
+            <div class="page__desc">21天爱上写作训练营</div>
+            <div class="page__detail">
+                <p>累计打卡<span>18</span>天</p>
+                <p>连续打卡<span>1</span>天</p>
+                <p>累计写作字数<span>5277</span>字</p>
+            </div>
+        </div>
+        <div class="page__qrcode">
+            <img src="http://p3tfrakck.bkt.clouddn.com/base/qrcode.jpg"></img>
+            <div class="page__tip">
+                长按识别二维码
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
