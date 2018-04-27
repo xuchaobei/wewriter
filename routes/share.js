@@ -2,6 +2,9 @@ var express = require('express');
 var path = require('path');
 var webshot = require('webshot');
 var ejs = require('ejs');
+var fs = require('fs');
+var url = require('url');
+var qs = require('querystring');
 var Report = require('../models/report');
 var Share = require('../models/share');
 var Date = require('../utils/date');
@@ -20,6 +23,8 @@ var webshotOptions = {
 };
 
 var router = express.Router();
+// var PicUrlBase = 'http://wewriter.xin/images/share/';
+var PicUrlBase = 'http://172.16.47.237:3000/images/share/';
 
 router.get('/', function(req, res, next) {
   return res.render('addShare');
@@ -34,6 +39,24 @@ router.post('/save', function(req, res, next) {
       res.json({code: 2000});
     }
   })
+})
+
+router.get('/picture', function(req, res, next) {
+  var queryUrl = url.parse(req.url).query ;
+  var params = qs.parse(queryUrl);
+  var userId = params.userId;
+  var filePath = path.resolve(__dirname,'../public/images/share/'+ userId + '.png');
+  if(fs.existsSync(filePath)) {
+    var picUrl = PicUrlBase + userId + '.png?ts=' + new Date().getTime();
+    res.json({
+      code: 2000,
+      url: picUrl
+    })
+  }else {
+    res.json({
+      message: '您还没有日签生成，请先打卡',
+    })
+  }
 })
 
 router.post('/', function(req, res, next) {
@@ -96,9 +119,8 @@ function generatePic(userId, html, res) {
       console.log(`error: ${err}`);
       res.send({message:'生成日签失败' });
     } else {
-      var url = 'http://wewriter.xin/images/share/' + userId + '.png?ts=' + new Date().getTime();
-      // var url = 'http://172.16.47.237:3000/images/share/' + userId + '.png?ts=' + new Date().getTime();
-      res.send({code:2000, url: url });
+      var picUrl = PicUrlBase + userId + '.png?ts=' + new Date().getTime();
+      res.send({code:2000, url: picUrl });
     } 
   })
 }
