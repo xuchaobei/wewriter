@@ -18,7 +18,7 @@
     "express-session": "^1.13.0",
     "jade": "*",
     "morgan": "~1.6.1",
-    "mysql": "*",
+    "mysql": "^2.15.0",
     "node-uuid": "*",
     "serve-favicon": "~2.3.0",
     "webshot": "^0.18.0"
