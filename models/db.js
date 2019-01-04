@@ -8,7 +8,7 @@ var dbPool = mysql.createPool({
     user: setting.user,
     password: setting.password,
     database : setting.db,
-    charset : 'utf8',
+    charset : 'utf8mb4',
     port: '3306'});
 
 dbPool.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
