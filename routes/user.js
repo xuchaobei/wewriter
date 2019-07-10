@@ -36,7 +36,12 @@ router.get('/login', function(req, res, next) {
   var request = https.request(options, function(response) {
     response.on('data', function(data) {
       var jsonData = JSON.parse(data);
-      res.send({flag:true, userId: jsonData.openid});
+      if(jsonData.openid) {
+        res.send({flag:true, userId: jsonData.openid});
+      } else {
+        console.error('get openid failed: '+ jsonData.errmsg);
+        res.send({flag:false});
+      }
     });
   });
 

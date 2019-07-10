@@ -11,6 +11,7 @@ function Record(record) {
     this.date = record.date;
     this.title = record.title;
     this.wordCount = record.wordCount;
+    this.articleLink = record.articleLink;
     this.category = record.category;
 }
 
@@ -21,6 +22,7 @@ Record.prototype.save = function save(conn, callback) {
         date: this.date,
         title: this.title,
         word_count: this.wordCount,
+        article_link: this.articleLink,
         category: this.category
     };
 

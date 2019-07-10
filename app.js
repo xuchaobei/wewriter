@@ -85,10 +85,7 @@ function init() {
 
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+        res.json({'message': err})
     });
 
     http.createServer(app).listen(app.get('port'), function () {

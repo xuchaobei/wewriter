@@ -37,16 +37,10 @@ router.get("/mini/:user", function (req, res, next) {
 router.post("/", function (req, res, next) {
     var userName = CommonUtil.trim(req.body.name);
     if(userName.length == 0){
-        req.flash('message', { message : '笔名不能为空!'});
-        res.redirect('/');
+        res.json({'message': '昵称不能为空!'});
         return;
     }
-    var userId;
-    if(!req.body.user) {
-      var userId = base64.encode(userName);
-    }else{
-      userId = req.body.user;
-    }
+    var userId = req.body.user;
     if(!userId){
         res.json({'message': '无法获取用户ID，请尝试重新打开小程序'});
         return;
@@ -61,7 +55,8 @@ router.post("/", function (req, res, next) {
         userName: userName,
         date: date,
         title: CommonUtil.trim(req.body.title),
-        wordCount: CommonUtil.trim(req.body.word_count)
+        wordCount: CommonUtil.trim(req.body.word_count),
+        articleLink: CommonUtil.trim(req.body.article_link)
     });
 
     var user = new User({
@@ -73,14 +68,14 @@ router.post("/", function (req, res, next) {
 
     dbPool.getConnection(function(err, connection) {
         if (err) {
-            console.log('record save failed: '+ JSON.stringify(record));
+            console.error('record save failed: '+ JSON.stringify(record) + ' [error message]:' + err);
             connection.release();
             return next(err);
         }
 
         connection.beginTransaction(function (err) {
             if (err) {
-                console.log('record save failed: '+ JSON.stringify(record));
+                console.error('record save failed: '+ JSON.stringify(record) + ' [error message]:' + err);
                 connection.release();
                 return next(err);
             }
@@ -107,14 +102,11 @@ router.post("/", function (req, res, next) {
                 }
             ],function (err, results) {
                 if (err) {
-                    console.log('record save failed: '+ JSON.stringify(record));
+                    console.error('record save failed: '+ JSON.stringify(record) + ' [error message]:' + err);
                     connection.rollback(function () {
                         if(err.message){
-                            //req.flash('message',err);
-                            //res.redirect('/activity');
                             res.json({'message': err.message});
                         }else{
-                            // next(err);
                             res.json({'message': '程序异常，打卡失败'});
                         }
                     });
@@ -122,11 +114,9 @@ router.post("/", function (req, res, next) {
                     connection.commit(function (err) {
                         if (err) {
                             connection.rollback(function () {
-                                //next(err);
                                 res.json({'message': '程序异常，打卡失败'});
                             });
                         }else{
-                            //res.redirect('/record/' + encodeURIComponent(userId));
                             res.json({'code':'2000'});
                         }
                     });
