@@ -29,37 +29,6 @@ Report.getDefaultByUserId = function getDefaultByUserId(userId, callback){
             callback("无数据");
         }
     });
-
- /*   async.series({
-
-        continuousCount : function getContinuousCount(callback) {
-            var date = new Date().Format('yyyy-MM-dd');
-            var count = 0;
-            dbPool.query('select * from record where user_name = ? and `date` = ?',[user, date], function(err, rows){
-                console.log('count ='+rows);
-                //if(rows && rows.length == 1){
-                if(rows && rows.length > 0){
-                    count = rows[0].continuous_count;
-                }
-                callback(null, count);
-            })
-        },
-        totalCount: function getTotalCount(callback) {
-            var count = 0;
-            dbPool.query('select count(*) as total_count from record where user_name = ?',[user], function(err, rows){
-                count = rows[0].total_count;
-                callback(null, count);
-            })
-        }
-    }
-    , function (err, results) {
-        if (err) {
-            console.error(err);
-            callback(err);
-        } else {
-            callback(null, results);
-        }
-    });*/
 };
 
 

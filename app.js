@@ -24,7 +24,9 @@ var express = require('express')
     , logger = require('morgan')
     , flash = require('connect-flash')
     , session = require("express-session")
-    , compression = require('compression');
+    , compression = require('compression')
+    , pino = require('express-pino-logger')()
+    ;
 
 var app = express();
 
@@ -32,6 +34,7 @@ app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 //app.use(favicon());
+app.use(pino);
 app.use(logger('combined'));
 app.use(compression());
 app.use(bodyParser.json());
@@ -77,7 +80,6 @@ function init() {
 
     // catch 404 and forward to error handler
     app.use(function(req, res, next) {
-        console.log('not found');
         var err = new Error('Not Found');
         err.status = 404;
         next(err);

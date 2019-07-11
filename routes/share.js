@@ -23,8 +23,7 @@ var webshotOptions = {
 };
 
 var router = express.Router();
-// var PicUrlBase = 'http://wewriter.xin/images/share/';
-var PicUrlBase = 'http://172.16.47.237:3000/images/share/';
+var PicUrlBase = 'http://qingcheng.ink/images/share/';
 
 router.get('/', function(req, res, next) {
   return res.render('addShare');
@@ -105,7 +104,7 @@ router.post('/', function(req, res, next) {
 function parseTemplate(userId, data, res) {
   ejs.renderFile(path.resolve(__dirname,'../views/share.ejs'), data, function(err, html){
     if(err) {
-      console.log(`error to render template: ${err}`);
+      req.log.error(err);
       res.send({message:'生成日签失败' });
       return;
     }
@@ -116,7 +115,7 @@ function parseTemplate(userId, data, res) {
 function generatePic(userId, html, res) {
   webshot(html, path.resolve(__dirname,'../public/images/share/'+ userId + '.png'), webshotOptions, function(err) {
     if(err) {
-      console.log(`error: ${err}`);
+      req.log.error(err);
       res.send({message:'生成日签失败' });
     } else {
       var picUrl = PicUrlBase + userId + '.png?ts=' + new Date().getTime();

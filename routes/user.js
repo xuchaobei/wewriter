@@ -39,14 +39,14 @@ router.get('/login', function(req, res, next) {
       if(jsonData.openid) {
         res.send({flag:true, userId: jsonData.openid});
       } else {
-        console.error('get openid failed: '+ jsonData.errmsg);
+        req.log.error('get openid failed: '+ jsonData.errmsg);
         res.send({flag:false});
       }
     });
   });
 
   request.on('error', function(error) {
-    console.error(error);
+    req.log.error(error);
     res.send({flag:false});
   });
   request.end();

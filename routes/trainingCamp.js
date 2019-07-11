@@ -9,7 +9,7 @@ var CommonUtil = require('../utils/common');
 router.get("/", function (req, res, next) {
     Activity.getCurrentTerm(function (err, term) {
       if (err) {
-          console.log(err);
+          req.log.error(err);
           res.json({'message':'程序异常'});
           return;
       }
@@ -25,13 +25,13 @@ router.post("/register", function (req, res, next) {
     }
     Activity.getCurrentTerm(function (err, term) {
       if (err) {
-          console.log(err);
+          req.log.error(err);
           res.json({'message':'程序异常'});
           return;
       }
       UserActivity.checkIfRegistered(userId, term, function(err, ifRegistered){
         if(err) {
-          console.log(err);
+          req.log.error(err);
           res.json({'message':'程序异常'});
           return;
         }
@@ -45,7 +45,7 @@ router.post("/register", function (req, res, next) {
         });
         userActivity.save(dbPool, function(err){
             if(err) {
-              console.error(err);
+              req.log.error(err);
               res.json({'message':'程序异常'});
             }else {
               res.json({'code':'2000'});

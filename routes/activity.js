@@ -41,14 +41,14 @@ router.post("/", function (req, res, next) {
 
     dbPool.getConnection(function(err, connection) {
         if (err) {
-            console.log('record save failed: '+ JSON.stringify(record));
+            req.log.error(err);
             connection.release();
             return next(err);
         }
 
         connection.beginTransaction(function (err) {
             if (err) {
-                console.log('record save failed: '+ JSON.stringify(record));
+                req.log.error(err);
                 connection.release();
                 return next(err);
             }
@@ -83,14 +83,11 @@ router.post("/", function (req, res, next) {
                 }
             ], function (err, results) {
                 if (err) {
-                    console.log('record save failed: '+ JSON.stringify(record));
+                    req.log.error(err);
                     connection.rollback(function () {
                         if(err.message){
-                            //req.flash('message',err);
-                            //res.redirect('/activity');
                             res.json({'message': err.message});
                         }else{
-                            // next(err);
                             res.json({'message': '程序异常，打卡失败'});
                         }
                     });
@@ -98,11 +95,9 @@ router.post("/", function (req, res, next) {
                     connection.commit(function (err) {
                         if (err) {
                             connection.rollback(function () {
-                                //next(err);
                                 res.json({'message': '程序异常，打卡失败'});
                             });
                         }else{
-                            //res.redirect('/record/' + encodeURIComponent(userId));
                             res.json({'code':'2000'});
                         }
                     });

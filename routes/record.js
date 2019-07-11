@@ -17,7 +17,6 @@ router.get("/:user", function (req, res, next) {
         if(err){
             res.json({'message' : err});
         }else{
-            console.dir(report);
             res.json({'code':2000, 'continuousCount': report.continuousCount, 'totalCount': report.totalCount, 'totalWords': report.totalWords});
         }
     });
@@ -68,14 +67,16 @@ router.post("/", function (req, res, next) {
 
     dbPool.getConnection(function(err, connection) {
         if (err) {
-            console.error('record save failed: '+ JSON.stringify(record) + ' [error message]:' + err);
+            req.log.error('record save failed: '+ JSON.stringify(record));
+            req.log.error(err);
             connection.release();
             return next(err);
         }
 
         connection.beginTransaction(function (err) {
             if (err) {
-                console.error('record save failed: '+ JSON.stringify(record) + ' [error message]:' + err);
+                req.log.error('record save failed: '+ JSON.stringify(record));
+                req.log.error(err);
                 connection.release();
                 return next(err);
             }
@@ -102,7 +103,8 @@ router.post("/", function (req, res, next) {
                 }
             ],function (err, results) {
                 if (err) {
-                    console.error('record save failed: '+ JSON.stringify(record) + ' [error message]:' + err);
+                    req.log.error('record save failed: '+ JSON.stringify(record));
+                    req.log.error(err);
                     connection.rollback(function () {
                         if(err.message){
                             res.json({'message': err.message});

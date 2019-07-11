@@ -48,14 +48,14 @@ router.post('/', function(req, res, next) {
 function saveUserActivity(userActivity, res, next){
   dbPool.getConnection(function(err, connection){
     if (err) {
-      console.log('sign up failed due to db connection ');
+      req.log.error(err);
       connection.release();
       return next(err);
     }
 
     userActivity.save(connection, function (err) {
       if (err) {
-        console.log('save userActivity failed ');
+        req.log.error(err);
         connection.release();
         return next(err);
       } else {

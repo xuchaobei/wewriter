@@ -71,9 +71,7 @@ User.prototype.save = function save(conn, callback){
         }
     ], function (err, results) {
         if (err) {
-            console.error(err);
             callback(err);
-            //throw err;
         } else {
             callback(null);
         }
