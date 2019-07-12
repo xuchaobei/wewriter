@@ -27,12 +27,16 @@ router.get('/login', function(req, res, next) {
   var queryUrl = url.parse(req.url).query ;
   var params = qs.parse(queryUrl);
   var code = decodeURIComponent(params.code);
-
   var options = {
     hostname: 'api.weixin.qq.com',
     path: '/sns/jscode2session?appid='+setting.appid+'&secret='+setting.secret+'&js_code='+code+'&grant_type=authorization_code',
     method: 'GET'
   }
+  var counter = 0;
+  getOpenId(req, res, options, counter);
+});
+
+function getOpenId(req, res, options) {
   var request = https.request(options, function(response) {
     response.on('data', function(data) {
       var jsonData = JSON.parse(data);
@@ -46,12 +50,18 @@ router.get('/login', function(req, res, next) {
   });
 
   request.on('error', function(error) {
+    req.log.error('get openid failed: ');
     req.log.error(error);
-    res.send({flag:false});
+    if(counter === 3) {
+      res.send({flag:false});
+      return;
+    }
+    counter++;
+    req.log.info(`第${counter}次重试`)
+    getOpenId(req, res, options, counter)
   });
+  
   request.end();
-
-});
-
+}
 
 module.exports = router;
