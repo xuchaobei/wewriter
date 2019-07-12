@@ -21,11 +21,10 @@ var express = require('express')
     , async = require('async')
     , bodyParser = require('body-parser')
     , favicon = require('serve-favicon')
-    , logger = require('morgan')
     , flash = require('connect-flash')
     , session = require("express-session")
     , compression = require('compression')
-    , pino = require('express-pino-logger')()
+    , pino = require('express-pino-logger')({timestamp: function() {return `,"time":${new Date().toISOString()}`}})
     ;
 
 var app = express();
@@ -33,9 +32,7 @@ var app = express();
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-//app.use(favicon());
 app.use(pino);
-app.use(logger('combined'));
 app.use(compression());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
