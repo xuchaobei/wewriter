@@ -23,7 +23,7 @@ var webshotOptions = {
 };
 
 var router = express.Router();
-var PicUrlBase = 'http://qingcheng.ink/images/share/';
+var PicUrlBase = 'http://qingcheng.ink/microapp/images/share/';
 
 router.get('/', function(req, res, next) {
   return res.render('addShare');
