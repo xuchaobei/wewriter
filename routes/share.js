@@ -1,6 +1,6 @@
 var express = require('express');
 var path = require('path');
-var webshot = require('webshot');
+var webshot = require('node-webshot');
 var ejs = require('ejs');
 var fs = require('fs');
 var url = require('url');

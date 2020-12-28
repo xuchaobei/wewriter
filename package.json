@@ -20,7 +20,7 @@
     "morgan": "^1.9.1",
     "mysql": "^2.15.0",
     "node-uuid": "*",
-    "serve-favicon": "^2.4.5",
-    "webshot": "^0.18.0"
+    "node-webshot": "^1.0.4",
+    "serve-favicon": "^2.4.5"
   }
 }
